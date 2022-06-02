@@ -1,0 +1,26 @@
+version : '3.6'
+
+services:
+  mysql_db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: testapp
+      MYSQL_ROOT_PASSWORD: init1234
+    volumes:
+      - mysqldata:/var/lib/mysqltest/data
+    ports:
+      - "3306:3306"
+
+  redis_db:
+    image: redis:6
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass init1234
+    volumes:
+      - redisdata:/var/lib/redis/data
+
+volumes:
+  mysqldata:
+  redisdata:
